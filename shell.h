@@ -7,14 +7,20 @@
 #include <string.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+
 #define INPUT 1024
+#define ARGS_COUNT 20
+
 
 void my_prompt();
 int my_strlen(const char *c);
 void my_print(const char *input);
-int cmd_arg(void);
+void getargs(char *input, size_t size);
+void exec_cmd(char *command);
+
+/*
 char *my_strdup(char *arg);
-void exec(void);
+void exec(const char *argv[]);*/
 
 
 

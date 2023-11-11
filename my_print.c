@@ -7,5 +7,5 @@
  */
 void my_print(const char *input)
 {
-	write(STDOUT_FILENO, &input, my_strlen(input));
+	write(STDOUT_FILENO, input, my_strlen(input));
 }

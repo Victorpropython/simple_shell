@@ -1,33 +1,54 @@
 #include "shell.h"
-/********************** to exec the shell ********************/
 /**
- * exec - To execute a process
- *  
- * Return: to execute a program
+ * exec_cmd - To execute command line args
+ * @command: pointer to args
+ *
+ * Return: Always (0)
  */
-void exec(void)
+void exec_cmd(char *command)
 {
-	char **argv;
 	pid_t pid = fork();
+	char *argv[ARGS_COUNT];
+	int argc;
+	char *token;
+	char *delim = " ";
 	int status;
 
-	
-	if (pid < 0)
+	if (pid == -1)
 	{
 		perror("fork");
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
-	if (pid == 0)
+	else if (pid == 0)
 	{
-		if (execve(argv[0], argv, NULL) == -1)
+		argv[ARGS_COUNT + 2];
+		argc = 0;
+		argv[argc++] = command;
+		token = strtok(NULL, delim);
+
+		while (token != NULL && argc < ARGS_COUNT)
 		{
-			perror("exec");
-			exit(1);
+			argv[argc++] = token;
+			token = strtok(NULL, delim);
+		}
+		argv[argc] = NULL;
+		if (execve(command, argv,NULL) == -1)
+		{
+			perror("execve");
+			exit(EXIT_FAILURE);
 		}
 	}
 	else
 	{
-		waitpid(pid, &status, 0);
+		if (wait(&status) == -1)
+		{
+			perror("wait");
+			exit(EXIT_FAILURE);
+		}
+		if (WIFEXITED(status) && WEXITSTATUS(status) == 127)
+		{
+			my_print("command not found ");
+		}
 	}
-}
 
+}
