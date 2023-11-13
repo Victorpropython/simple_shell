@@ -54,4 +54,36 @@ char *my_strdup(char *arg)
 	return (copy);
 }
 
+/*************************** TOKENIZATION OF LINE**************************/
+/**
+ * tokenise_line - Function used in breaking string into substring
+ * @buffer: string pointer for tokenisation
+ * @delim: used as delimeter
+ * @toks_num: number of string token broken into substring
+ *
+ * Return: pointer String arrays of substring
+ */
+char **tokenise_line(char *buffer, char *delim, int toks_num)
+{
+        char *toks = NULL;
+        char **argv = NULL;
+        int i = 0;
 
+        argv = malloc(sizeof(char *) * toks_num);
+
+        if (argv == NULL)
+        {
+                perror("No space given\n");
+                exit(EXIT_FAILURE);
+        }
+        toks = strtok(buffer, delim);
+        while (toks)
+        {
+                argv[i] = toks;
+                i++;
+                toks = strtok(NULL, delim);
+        }
+        argv[i] = NULL;
+
+        return (argv);
+}

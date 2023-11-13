@@ -1,0 +1,29 @@
+/****************** adding to directory ********************************/
+/**
+ * add_to_dir - To add '/' and command name to the end of a dir
+ * @dir: command directory for adding character and command
+ * @alpha: character to add
+ * @argv: Array ofcammand passed
+ *
+ * Return: pionts to the new string
+ */
+char *add_to_dir(char *dir, char **argv, char *alpha)
+{
+        char *tmp = NULL;
+        int buf_num;
+
+        buf_num = (stnrlen(dir) + stnrlen(argv[0] + 2));
+        tmp = malloc(sizeof(char) * buf_num);
+        if (!tmp)
+        {
+                return (argv[0]);
+        }
+        if (dir == NULL)
+        {
+                return (argv[0]);
+        }
+        _strcpy(tmp, dir);
+        _strcat(tmp, alpha);
+        _strcat(tmp, argv[0]);
+        return (tmp);
+}
