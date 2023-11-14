@@ -12,20 +12,20 @@ int main(int ac, char **argv)
 	ssize_t nums;
 	char *buff = NULL, *buff_copy = NULL;
 	char *token;
-	int num_toks = 0;
+	int nums_toks = 0;
 	const char *delim = " \n";
 	
 	(void)ac; /*(void)argv;*/
 	while(1)
 	{
 
-		printf("$");
+		our_printf("$");
 		nums = getline(&buff, &m, stdin);
 
 		
 		if (nums == -1)
 		{
-			printf("Exiting shell ...\n");
+			our_printf("Exiting shell ...\n");
 			return (-1);
 		}
 						
@@ -35,25 +35,25 @@ int main(int ac, char **argv)
 			perror("tsh: memory allocation error");
 			return (-1);
 		}
-		strcpy(buff_copy, buff);
+		our_strcpy(buff_copy, buff);
 
-		token = strtok(buff, delim);
+		token = my_strtok(buff, delim);
 
 		while (token != NULL)
 		{
-			num_toks++;
-			token = strtok(NULL, delim);
+			nums_toks++;
+			token = my_strtok(NULL, delim);
 		}
-		num_toks++;
-		argv = malloc(sizeof(char *) * num_toks);
+		nums_toks++;
+		argv = malloc(sizeof(char *) * nums_toks);
 
-		token = strtok(buff_copy, delim);
+		token = my_strtok(buff_copy, delim);
 
 		for (i = 0; token != NULL; i++)
 		{
-			argv[i] = malloc(sizeof(char) * strlen(token));
-			strcpy(argv[i], token);
-			token = strtok(NULL, delim);
+			argv[i] = malloc(sizeof(char) * stnrlen(token));
+			our_strcpy(argv[i], token);
+			token = my_strtok(NULL, delim);
 		}
 		argv[i] = NULL;
 		execmd(argv);

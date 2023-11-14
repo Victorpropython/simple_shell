@@ -8,4 +8,4 @@
 
 ## Authors
 ---
-* This project was designed and hand-crafted with love by **Toluwalase Onanuga** -[#](https://github.com/simple_shell) and **Victor Chibuike** - [Victorpropython](https://github.com//victorpropython) 
+* This project was designed and hand-crafted with love by **Toluwalase Onanuga** -[superdev69](https://github.com/superdev69/simple_shell) and **Victor Chibuike** - [Victorpropython](https://github.com//victorpropython) 
