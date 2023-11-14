@@ -20,7 +20,7 @@ void execmd(char **argv)
 		}
 		else if (pid == 0)
 		{
-			if (execve(cmd, argv, NULL) == -1)
+			if (execve(cmd, argv, __environ) == -1)
 			{
 				perror("Error");
 			}

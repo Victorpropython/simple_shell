@@ -10,11 +10,16 @@
 #include <errno.h>
 #include <stdarg.h>
 #include <stdint.h>
+#include <signal.h>
+#include <limits.h>
+#include <dirent.h>
+#include <sys/stat.h>
 
 #define INPUT 1024
 #define ARGS_COUNT 20
 
 #define DECIMAL 10
+#define HEX 16
 
 #define DELIM " \n\t\a\r:"
 
@@ -33,7 +38,7 @@ typedef struct strngspec
 } ss_t;
 
 
-extern char ** __environ;
+extern char** __environ;
 
 void execmd(char **argv);
 void my_prompt();
@@ -61,17 +66,11 @@ int stnrlen(const char *u);
 char *our_strchr(char *str, int b);
 char *our_strdup(char *org);
 
-/*int my_strlen(const char *c);
-void my_print(const char *input);
-void getargs(char *input, size_t size);
-void exec_cmd(char *command);
 
-*/
+
 
 /************ For tokenization ***************/
-char **tokenise_line(char *buffer, char *delim, int toks_num);
 int num_toks(char *buffer, char *delim);
-/*char *my_strtok(char *str, const char *delim);*/
 unsigned int is_delim(char c, const char *delim);
 char *my_strtok(char *srcString, const char *delim);
 
@@ -80,11 +79,13 @@ char *my_strtok(char *srcString, const char *delim);
 
 /********* To order path *************/
 char *order_dir(char **ord);
-/*
-char *my_strdup(char *arg);
-void exec(const char *argv[]);*/
+char *search_path(char *command);
 
-
+/***************** for directory path ********/
+char *_getenvirons(const char *nam);
+char *add_to_dir(char *dir, char **argv, char *alpha);
+char **toks_PATH(char *envVar, char *delim);
+char **tokenise_line(char *buffer, char *delim, int toks_num);
 
 
 
