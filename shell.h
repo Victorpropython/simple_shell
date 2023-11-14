@@ -71,7 +71,11 @@ void exec_cmd(char *command);
 /************ For tokenization ***************/
 char **tokenise_line(char *buffer, char *delim, int toks_num);
 int num_toks(char *buffer, char *delim);
-char my_token(char *str, const char *delim);
+/*char *my_strtok(char *str, const char *delim);*/
+unsigned int is_delim(char c, const char *delim);
+char *my_strtok(char *srcString, const char *delim);
+
+ 
 
 
 /********* To order path *************/

@@ -101,26 +101,45 @@ int num_toks(char *buffer, char *delim)
 }
 
 /******************* For strtok ***************/
-
+/*
 char *my_strtok(char *str, const char *delim)
 {
 	static char *lastoken = NULL;
 	char *startoken;
 	char *endtoken;
+	int i = 0;
 
 	if (str != NULL)
 	{
 		lastoken = str;
 	}
-	else
+	if (lastoken == NULL)
 	{
-		if (lastoken == NULL)
+		return (NULL);
+	}
+
+	startoken = (char *)malloc(strlen(lastoken) + 1);
+	
+	for (; lastoken[i] != '\0'; i++)
+	{
+		if (lastoken[i] != (char)delim)
 		{
-			return (NULL);
+			startoken[i] = lastoken[i];
+		}
+		else
+		{
+			startoken[i] = '\0';
+			lastoken = lastoken + i + 1;
+			return (startoken);
 		}
 	}
-	startoken = lastoken;
+	startoken[i] = '\0';
+	lastoken = NULL;
 
+	return (startoken);
+}
+
+/*
 	while (*lastoken != '\0' && strchr(delim, *lastoken) != NULL)
 	{
 		lastoken++;
@@ -145,3 +164,73 @@ char *my_strtok(char *str, const char *delim)
 	}
 	return (startoken);
 }
+*
+*/
+/*
+char *my_strtok(char *str1,char *str2)
+{
+    while (*str1 != '\0')
+	{
+      		if (*str1 == *str2) 
+			our_printf("\n");
+      		else 
+			our_printf("%c",*str1);
+		
+      			str1++;
+    	}
+    our_printf("\n");
+}
+*/
+unsigned int is_delim(char c, const char *delim)
+{
+	while (*delim != '\0')
+	{
+		if (c == *delim)
+		{
+			return (1);
+		}
+		delim++;
+	}
+	return (0);
+}
+char *my_strtok(char *srcString, const char *delim)
+{
+	static char *backup_string;
+	char *ret;
+
+	if (!srcString)
+	{
+		return(NULL);
+	}
+
+	while (1)
+	{
+		if (is_delim(*srcString, delim))
+		{
+			srcString++;
+			continue;
+		}
+		if (*srcString == '\0')
+		{
+			return (NULL);
+		}
+		break;
+	}
+	ret = srcString;
+	while (1)
+	{
+		if (*srcString == '\0')
+		{
+			backup_string = srcString;
+			return (ret);
+		}
+		if(is_delim(*srcString, delim))
+		{
+			*srcString = '\0';
+			backup_string = srcString + 1;
+			return (ret);
+		}
+		srcString++;
+	}
+}
+
