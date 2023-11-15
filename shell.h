@@ -24,25 +24,25 @@
 #define DELIM " \n\t\a\r:"
 
 /**
- * struct strngspecc - structure for format specifier
+ * struct strngspec - structure for format specifier
  * @ss: used as specifier
  * @f: a pointer to function
  * Descriptor: used for printf
  */
-
-
 typedef struct strngspec
 {
 	char ss;
 	void (*f)();
 } ss_t;
 
-
-
-extern char** __environ;
-
-
+extern char **__environ;
 /***** for builtin *******/
+/**
+ * struct builtins - use for specific functions
+ * @command: commands to be used
+ * @func: member used as a variable
+ * Return: to return a double char pointer
+ **/
 typedef struct builtins
 {
 	char *command;
@@ -54,6 +54,8 @@ void execmd(char **argv);
 void my_prompt(void);
 int to_exec_commands(char **argv);
 void exec_commd(char **arg, char **argv, int num);
+void process_input(int ac __attribute__ ((unused)), char **argv);
+
 /************ To carry out some builtin functions *******/
 void print_environs(char **args __attribute__((unused)));
 void for_cd(char **args);

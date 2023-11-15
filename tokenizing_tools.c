@@ -3,8 +3,8 @@
 /**
  * is_delim - used to specify delimeter variable
  * @c: argument for variable
- * @delim: delimeter 
- * Return: to return 0 
+ * @delim: delimeter
+ * Return: to return 0
  */
 
 unsigned int is_delim(char c, const char *delim)
@@ -35,7 +35,7 @@ char *my_strtok(char *srcString, const char *delim)
 
 	if (!srcString)
 	{
-		return(NULL);
+		return (NULL);
 	}
 
 	while (1)
@@ -59,7 +59,7 @@ char *my_strtok(char *srcString, const char *delim)
 			backup_string = srcString;
 			return (ret);
 		}
-		if(is_delim(*srcString, delim))
+		if (is_delim(*srcString, delim))
 		{
 			*srcString = '\0';
 			backup_string = srcString + 1;
