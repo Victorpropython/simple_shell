@@ -74,7 +74,7 @@ char *order_dir(char **ord)
 }
 /********************* To tokenise path ***********************/
 /**
- * PATH - To tokenise string into substring
+ * **toks_PATH - To tokenise string into substring
  * @envVar: Token pointer
  * @delim: Array for characters
  *
