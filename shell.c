@@ -4,7 +4,7 @@
  * 
  * Return: Always 0;
  */
-int main(int ac, char **argv)
+int main(int ac __attribute__((unused)), char **argv)
 {
 
 	int i = 0;
@@ -12,12 +12,17 @@ int main(int ac, char **argv)
 	ssize_t nums;
 	char *buff = NULL, *buff_copy = NULL;
 	char *token;
-	int nums_toks = 0;
+	int nums_toks = 0, count = 0, toknum;
 	const char *delim = " \n";
+	char **arg = NULL;
 	
 	(void)ac; /*(void)argv;*/
+
+	signal(SIGINT, ctrl_c);
+
 	while(1)
 	{
+		count++;
 
 		our_printf("$");
 		nums = getline(&buff, &m, stdin);
@@ -55,9 +60,14 @@ int main(int ac, char **argv)
 			our_strcpy(argv[i], token);
 			token = my_strtok(NULL, delim);
 		}
+		toknum = num_toks(buff_copy, DELIM);
+		arg = tokenise_line(buff, DELIM, toknum);
 		argv[i] = NULL;
-		execmd(argv);
-		
+		if (arg[0] != NULL)
+		{
+			exec_commd(arg, argv, count);
+			arg[0]++;
+		}
 	}
 	/* To remove newline character
 	//input[strcspn(input, "\n")] = '\0';*/

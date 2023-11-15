@@ -38,12 +38,30 @@ typedef struct strngspec
 } ss_t;
 
 
+
 extern char** __environ;
 
-void execmd(char **argv);
-void my_prompt();
 
-/********** for all printing *********/
+/***** for builtin *******/
+typedef struct builtins
+{
+	char *command;
+	void (*func)(char **);
+} builtins;
+
+/***************** To execute functions **********/
+void execmd(char **argv);
+void my_prompt(void);
+int to_exec_commands(char **argv);
+void exec_commd(char **arg, char **argv, int num);
+/************ To carry out some builtin functions *******/
+void print_environs(char **args __attribute__((unused)));
+void for_cd(char **args);
+void to_exit(char **args);
+
+
+
+/********* for all printing *********/
 void _print_int(va_list h);
 int our_printf(const char *format, ...);
 void our_puts(char *str);
@@ -66,7 +84,8 @@ int stnrlen(const char *u);
 char *our_strchr(char *str, int b);
 char *our_strdup(char *org);
 
-
+/***** for ctrl_c ************/
+void ctrl_c(int signum);
 
 
 /************ For tokenization ***************/
@@ -74,12 +93,11 @@ int num_toks(char *buffer, char *delim);
 unsigned int is_delim(char c, const char *delim);
 char *my_strtok(char *srcString, const char *delim);
 
- 
-
 
 /********* To order path *************/
 char *order_dir(char **ord);
 char *search_path(char *command);
+char *_getenvirons(const char *nam);
 
 /***************** for directory path ********/
 char *_getenvirons(const char *nam);
