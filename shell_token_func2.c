@@ -1,25 +1,31 @@
 #include "shell.h"
 
-/******************************** The NUMBER TOKENIZATION ****************/
 /**
- * num_toks -Use in finding the number of substring in string
- * @buffer: Pointer used for string tokenization
- * @delim: This is the delimiter variable in tokenization
- * Return: To return the number of substrings found
+ * ctrl_c - Assingning ctrl + c as a kill signal
+ * @signum: signum
+ *
+ * Return: Always 0.
  */
-int num_toks(char *buffer, char *delim)
+void ctrl_c(int signum)
 {
-	int toks_num = 0;
-	char *toks = NULL;
-
-	toks = my_strtok(buffer, delim);
-	toks_num++;
-	while (toks != NULL)
+	if (signum == SIGINT)
 	{
-		toks = my_strtok(NULL, delim);
-		toks_num++;
+		print("\n$", STDIN_FILENO);
 	}
-	return (toks_num);
+}
+
+/****************************** MY PRINT ****************************/
+
+/**
+ * print - function used for printing file output
+ * @vic: used as variable
+ * @df: descriptor for file
+ *
+ * Return: Always 0 (success) , -1(failure)
+ */
+int print(char *vic, int df)
+{
+	return (write(df, vic, stnrlen(vic)));
 }
 
 /*************************** TOKENIZATION OF LINE**************************/
@@ -38,18 +44,20 @@ char **tokenise_line(char *buffer, char *delim, int toks_num)
 	int i = 0;
 
 	argv = malloc(sizeof(char *) * toks_num);
+
 	if (argv == NULL)
 	{
 		perror("No space given\n");
 		exit(EXIT_FAILURE);
 	}
-	toks = my_strtok(buffer, delim);
+	toks = strtok(buffer, delim);
 	while (toks)
 	{
 		argv[i] = toks;
 		i++;
-		toks = my_strtok(NULL, delim);
+		toks = strtok(NULL, delim);
 	}
 	argv[i] = NULL;
+
 	return (argv);
 }

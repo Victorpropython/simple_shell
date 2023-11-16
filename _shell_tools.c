@@ -1,5 +1,4 @@
 #include "shell.h"
-
 /***************************PRINT INTEGER *********************/
 /**
  * _print_int - To print integer
@@ -67,42 +66,58 @@ int our_printf(const char *format, ...)
 	}
 	return (nums);
 }
-
-/*********************** to print a single character *********************/
+/*********************** UNSGNEDNUMTOSTRING ***************************/
 /**
- * our_puts - prints a string followed by a new line
- * @str: pointer variable.
+ * unsgnednumToString - Use to change a number to string
+ * @num: For unsigned number
+ * @target: start of the number
+ * @buff: for buffer pointer
  */
-void our_puts(char *str)
+void unsgnednumToString(uint64_t num, int target, char *buff)
 {
-	for (; *str != '\0'; str++)
-		putchar(*str);
-}
+	char fil[65];
+	int mor, m = 0, n = 0;
 
-/*****************************OUR_PUTCHAR_C *******************************/
-/**
- * our_putchar_c - used as a putchar
- * @c: used as variable
- * Return: Nothing
- */
-void our_putchar_c(char c)
-{
-	write(1, &c, 1);
+	if (num == 0)
+	{
+		*buff++ = '0';
+		*buff = '\0';
+		return;
+	}
+	while (num)
+	{
+		mor = num % target;
+		if (mor >= 10)
+		{
+			fil[m++] = 'a' + (mor - 10);
+		}
+		else
+		{
+			fil[m++] = '0' + mor;
+		}
+		num /= target;
+	}
+	for (n = m - 1; n >= 0; n--)
+	{
+		*buff++ = fil[n];
+	}
+	*buff = '\0';
 }
-
+/************************** Convert Number To String **********************/
 /**
- * _print_str - to print string
- * @h: used as variable
+ * numToString - To convert numbers to string
+ * @num: for unsigned number
+ * @target: base number
+ * @buff: pointer variable
  *
  * Return: Always 0.
  */
-void _print_str(va_list h)
+void numToString(int64_t num, int target, char *buff)
 {
-	char *b;
-
-	b = va_arg(h, char *);
-	while (*b != '\0')
+	if (num < 0)
 	{
-		our_putchar_c(*b++);
+		buff[0] = '-';
+		num *= -1;
 	}
+	unsgnednumToString(num, target, buff);
 }
