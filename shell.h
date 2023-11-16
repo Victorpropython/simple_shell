@@ -19,7 +19,7 @@
 #define HEX 16
 #define DECIMAL 10
 
-extern char** __environ;
+extern char **__environ;
 
 #define DELIM " \n\t\a\r:"
 
@@ -38,6 +38,13 @@ typedef struct strngspec
 } ss_t;
 
 /***** for builtin *******/
+
+/**
+ * struct builtins- structure for builtins
+ * @command: member for struct
+ * @func: pointer to a function
+ * Descriptor: used for..
+ */
 typedef struct builtins
 {
 	char *command;
@@ -45,11 +52,10 @@ typedef struct builtins
 } builtins;
 
 /**
- * struct flags - use for interaction
+ * struct victor - use for interaction
  * @interactive: mode system
  * Describe: For interaction
- */ 
-
+ */
 struct victor
 {
 	bool interactive;
