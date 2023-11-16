@@ -18,7 +18,8 @@
 
 #define HEX 16
 #define DECIMAL 10
-
+#define UNUSED __attribute__((UNUSED))
+#define UNSED
 extern char **__environ;
 
 #define DELIM " \n\t\a\r:"

@@ -17,6 +17,7 @@ int main(int argc __attribute__((unused)), char **argv)
 	struct victor flag;
 	int toks_num, exit_lop = 1, cunt = 0;
 
+	(void) flag;
 	if (argc < 1)
 	{
 		return (-1);
@@ -42,10 +43,10 @@ int main(int argc __attribute__((unused)), char **argv)
 			exec_commd(arg, argv, cunt);
 		}
 	}
-	if (nums < 0 && (flag).interactive)
-	{
+	/*if (nums < 0 && (flag).interactive)*/
+	/*{
 		write(STDERR_FILENO, "\n", 1);
-	}
+	*/
 	free(buff_copy);
 	free_buff(arg);
 	return (0);

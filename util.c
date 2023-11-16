@@ -9,6 +9,7 @@ int prompt(void)
 {
 	struct victor flag;
 
+	(void) flag;
 	if ((isatty(STDIN_FILENO) == 1) && (isatty(STDOUT_FILENO) == 1))
 	{
 		flag.interactive = 1;
