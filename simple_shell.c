@@ -43,10 +43,6 @@ int main(int argc __attribute__((unused)), char **argv)
 			exec_commd(arg, argv, cunt);
 		}
 	}
-	/*if (nums < 0 && (flag).interactive)*/
-	/*{
-		write(STDERR_FILENO, "\n", 1);
-	*/
 	free(buff_copy);
 	free_buff(arg);
 	return (0);
