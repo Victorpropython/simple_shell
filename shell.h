@@ -57,11 +57,11 @@ typedef struct builtins
  * @interactive: mode system
  * Describe: For interaction
  */
-struct victor
+typedef struct flags
 {
 	bool interactive;
-};
-extern struct victor flag;
+} flag;
+
 /** for library functions ********/
 
 

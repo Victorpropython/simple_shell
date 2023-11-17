@@ -7,12 +7,17 @@
  */
 int prompt(void)
 {
-	struct victor flag;
+	struct flags flag;
 
 	(void) flag;
 	if ((isatty(STDIN_FILENO) == 1) && (isatty(STDOUT_FILENO) == 1))
 	{
 		flag.interactive = 1;
+	}
+	else
+		return (0);
+	if (flag.interactive)
+	{
 		write(STDOUT_FILENO, "$ ", 2);
 	}
 	return (1);
