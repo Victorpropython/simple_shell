@@ -14,8 +14,9 @@ int main(int argc __attribute__((unused)), char **argv)
 	char **arg = NULL;
 	ssize_t nums;
 	size_t m = 0;
-	struct flags flag;
 	int toks_num, exit_lop = 1, cunt = 0;
+	struct flags flag = {0};
+	(void) flag;
 
 	if (argc < 1)
 	{
@@ -26,7 +27,6 @@ int main(int argc __attribute__((unused)), char **argv)
 	{
 		cunt++;
 		exit_lop = prompt();
-		/*exit_lop = prompt();*/
 		nums = getline(&buff, &m, stdin);
 
 		if (nums == -1)
@@ -39,9 +39,7 @@ int main(int argc __attribute__((unused)), char **argv)
 		arg = tokenise_line(buff, DELIM, toks_num);
 
 		if (arg[0] != NULL)
-		{
 			exec_commd(arg, argv, cunt);
-		}
 	}
 	if (nums < 0 && flag.interactive)
 		write(STDERR_FILENO, "\n", 1);
